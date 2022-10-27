@@ -1,27 +1,34 @@
-# FrontendInventario
+# InventarioConnect tecnologias
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
+- Este projeto foi desenvolvido com [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
+- Para o designer foi usado a biblioteca PrimeNG [PrimeFaces](https://primefaces.org/primeng/setup).
 
-## Development server
+## Servidor de Desenvolvimento
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Use `ng serve` para acessar o servidor de desenvolvimento. Vá para `http://localhost:4200/`. 
+- O aplicativo será recarregado automaticamente se você alterar qualquer um dos arquivos de origem.
 
-## Code scaffolding
+## Codigo estrutural
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-Use `ng generate component component-name` para gerar o novo componente. Você também pode usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Construtor
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Use `ng build` para construir o Projeto. A build é armazenada no `dist/`.
 
-## Running unit tests
+## Testes Unitários
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Use `ng test` para executar testes unitários via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Git
+- Ao clonar esse projeto você precisará, antes de qualqueer coisa dar um `npm install` para assim ser possível usar todas as dependêcias e bibliotecas. 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+===========================================================================================================================
 
-## Further help
+## Sobre o projeto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- É um sistema de inventário básico.
+
+- Em sua primeira versão será possivel:
+  - Cadastrar itens atribuindo, código (Que será o QRcode), local, responsável, valor, tipo de produto e o estado (novo, usado) em que ele se encontra. 
+  -Ler QRcode, se já houver o código, editar o item ou conferir os dados, se não houver, cadastra-lo. 

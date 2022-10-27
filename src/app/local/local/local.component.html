@@ -1,0 +1,31 @@
+<div class="container">
+    <p-messages></p-messages>
+    <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+
+    <div class="container m-6 p-3 bg-white border-round-md">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-10">
+                <h1 class="text-center">{{title}}</h1>
+            </div>
+            <div class="col-12 md:col-2">
+                <label>&nbsp;</label>
+                <button pButton routerLink="/local" icon="pi pi-fw pi-arrow-left" label="Voltar"></button>
+            </div>
+        </div>
+
+        <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()" responsiveLayout="scroll">
+            <div class="grid p-fluid">
+                <div class="col-10 md:col-12">
+                    <label for="ambiente">Ambiente</label>
+                    <input pInputText name="Descriçao" required [(ngModel)]="local.ambiente" #ambiente="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && ambiente.invalid && (ambiente.dirty || ambiente.touched) }">
+                </div>
+
+                <div class="col-12 ">
+                    <button class="p-button-success" pButton label="Salvar" icon="pi pi-fw pi-save"
+                        [disabled]="!f.valid"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

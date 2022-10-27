@@ -1,0 +1,52 @@
+<div class="container">
+    <p-messages></p-messages>
+    <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+
+    <div class="container m-6 p-3 bg-white border-round-md">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-10">
+                <h1 class="text-center">{{title}}</h1>
+            </div>
+            <div class="col-12 md:col-2">
+                <label>&nbsp;</label>
+                <button pButton routerLink="/usuarios" icon="pi pi-fw pi-arrow-left" label="Voltar"></button>
+            </div>
+        </div>
+
+        <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()" responsiveLayout="scroll">
+            <div class="grid p-fluid">
+
+                <div class="col-10 md:col-12">
+                    <label for="nome">Nome</label>
+                    <input pInputText name="Nome" required [(ngModel)]="usuario.nome" #nome="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && nome.invalid && (nome.dirty || nome.touched) }">
+                </div>
+
+                <div class="col-10 md:col-3">
+                    <label for="email">E-mail</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-at"></i></span>
+                        <input pInputText type="email" name="email" required [(ngModel)]="usuario.email"
+                            #email="ngModel"
+                            [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && email.invalid && (email.dirty || email.touched) }">
+                    </div>
+                </div>
+
+                <div class="col-12 md:col-3">
+                    <label for="senha">Senha</label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                        <input pInputText type="password" name="senha" required [(ngModel)]="usuario.senha"
+                            #senha="ngModel"
+                            [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && senha.invalid && (senha.touched) }">
+                    </div>
+                </div>
+
+                <div class="col-12 ">
+                    <button class="p-button-success" pButton label="Salvar" icon="pi pi-fw pi-save"
+                        [disabled]="!f.valid"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

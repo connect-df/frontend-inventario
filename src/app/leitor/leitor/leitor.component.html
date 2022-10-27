@@ -1,0 +1,11 @@
+<div class="containerBG">
+    <div class="leitor">
+        <div id="canvas" class="container-leitor">
+            <zxing-scanner class="leitor-cam" [formats]="allowedFormats" #scanner start="true"
+                (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
+        </div>
+        <section class="msg-result" *ngIf="qrResultString">
+            <p>{{ qrResultString }} não é um patrimonio válido, tente novamente.</p>
+        </section>
+    </div>
+</div>

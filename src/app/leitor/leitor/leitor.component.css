@@ -1,0 +1,146 @@
+.containerBG {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    align-content: center;
+}
+
+.leitor {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container-leitor {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-radius: 3.5px;
+
+}
+
+#canvas {
+    border:  solid orange ;
+}
+
+.leitor-cam {
+    width: 380px;
+    height: 285px;
+    object-fit: cover !important;
+    box-sizing: border-box !important;
+}
+
+
+.msg-result {
+    width: 100%;
+    padding: 10px auto;
+    margin: 5px auto;
+    color: white;
+    border-left: 3px solid rgb(211, 24, 24);
+    background-color: rgba(255, 0, 0, 0.479);
+}
+
+@media screen and (min-width: 320px) and (orientation:portrait) {
+    .containerBG {
+        align-items: flex-start;
+        height: 100vh;
+    }
+
+    .leitor {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        margin-top: 5rem;
+        padding: 0;
+    }
+
+    .container-leitor {
+        width: auto;
+        height: auto;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        border-radius: 3.5px;
+
+    }
+
+    #canvas {
+        border: 1px solid orange;
+    }
+
+    .leitor-cam {
+        width: 320px !important;
+        height: 240px !important;
+    }
+}
+
+@media screen and (min-width: 375px) and (orientation:portrait) {
+    .leitor {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        margin-top: 5rem;
+        padding: 0;
+    }
+
+    .container-leitor {
+        width: auto;
+        height: auto;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        border-radius: 3.5px;
+
+    }
+
+    #canvas {
+        border: 1px solid orange;
+    }
+
+    .leitor-cam {
+        width: 320px !important;
+        height: 240px !important;
+    }
+}
+
+
+@media screen and (min-width: 425px) and (orientation:portrait) {
+    .leitor {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        margin-top: 5rem;
+        padding: 0;
+    }
+
+    .container-leitor {
+        width: 320px !important;
+        height: 240px !important;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        border-radius: 3.5px;
+
+    }
+
+    #canvas {
+        border: 1px solid orange;
+    }
+
+    .leitor-cam {
+        width: 320px !important;
+        height: 240px !important;
+        object-fit: cover !important;
+        box-sizing: border-box !important;
+    }
+}

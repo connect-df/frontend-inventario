@@ -1,0 +1,17 @@
+    <div class="home w-100vw flex flex-column " responsiveLayout="scroll">
+        <div class="containerButton flex flex-wrap justify-content-center m-2" responsiveLayout="scroll">
+            <p-button label="Ler QR-code" icon="pi pi pi-qrcode" routerLink="/leitor"></p-button>
+        </div>
+
+        <div class="container flex flex-wrap justify-content-around border-round-md">
+            <div *ngFor="let local of locais" class=" flex m-1 border-round-md" responsiveLayout="scroll">
+                <p-card class="card cursor-pointer" header="{{local.ambiente}}" [style]="{width: '360px'}"
+                    styleClass="p-card-shadow" routerLink='/itens/local/{{local.ambiente}}/'>
+                    <ng-template pTemplate="header" class="containerImg">
+                        <img alt="Card" src="assets/showcase/img/connect_logo.svg" class="bg-white p-3 border-round-md 
+                        border-noround-bottom">
+                    </ng-template>
+                </p-card>
+            </div>
+        </div>
+    </div>

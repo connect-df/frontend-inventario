@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #282a3a;
+  background-color: #f3f4f8;
+  -webkit-font-smoothing: antialiased;
+  padding-top: 60px !important;
+  min-height: 100%;
+  letter-spacing: 0.25px;
+}
+
+.p-panelmenu .p-panelmenu-header a {
+  padding: 1.25rem !important;
+  border: 0px solid #dee2e6 !important;
+  color: #282a3a !important;
+  background: #d2d4da !important;
+  font-weight: 700;
+  transition: box-shadow 0.6s;
+
+}
+
+.p-panelmenu .p-panelmenu-header a:active {
+  background: #f58220 !important;
+}
+
+.p-panelmenu .p-panelmenu-header>a:focus {
+  background: #f58220 !important;
+}
+
+.p-card:hover {
+  background-color: #f58220;
+  color: #F4F4F4;
+  transition: 0.3s;
+}
+
+@media screen and (min-width: 1024px) and (orientation:portrait) {
+  .container {
+    width: 1024px !important;
+    margin: 0 60px !important;
+  }
+}

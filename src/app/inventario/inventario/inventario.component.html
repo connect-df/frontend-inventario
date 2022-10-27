@@ -1,0 +1,87 @@
+<div class="container">
+    <p-messages></p-messages>
+    <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+
+    <div class="container m-6 p-3 bg-white border-round-md">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-10">
+                <h1 class="text-center">{{title}}</h1>
+            </div>
+            <div class="col-12 md:col-2">
+                <label>&nbsp;</label>
+                <button pButton routerLink="/itens" icon="pi pi-fw pi-arrow-left" label="Voltar"></button>
+            </div>
+        </div>
+
+        <form autocomplete="off" #f="ngForm" (ngSubmit)="salvar()" responsiveLayout="scroll">
+            <div class="grid p-fluid">
+
+                <div class="col-12 md:col-5">
+                    <label for="patrimonio">Patrimonio</label>
+                    <input pInputText name="Patrimonio" required [(ngModel)]="inventario.patrimonio"
+                        #patrimonio="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && patrimonio.invalid && (patrimonio.dirty || patrimonio.touched) }">
+                </div>
+
+                <div class="col-12 md:col-7">
+                    <label for="descricao">Descrição</label>
+                    <input pInputText name="Descriçao" required [(ngModel)]="inventario.descricao" #descricao="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && descricao.invalid && (descricao.dirty || descricao.touched) }">
+                </div>
+
+                <div class="col-12 md:col-3">
+                    <label for="situacao">situação</label>
+                    <input pInputText name="situacao" required [(ngModel)]="inventario.situacao" #situacao="ngModel"
+                        [ngClass]="{ 'ng-invalid ng-dirty': f.submitted && situacao.invalid && (situacao.touched) }">
+                </div>
+
+                <div class="col-12 md:col-3">
+                    <label for="dt_cadastro">Data de cadastro</label>
+                    <p-inputMask mask="99-99-9999" placeholder="dd/mm/aaaa" [(ngModel)]="inventario.dtCadastro"
+                        [ngModelOptions]="{standalone: true}" slotChar="yyyy-mm-dd">
+                    </p-inputMask>
+                </div>
+
+                <div class="col-12 md:col-3">
+                    <label for="codigo">Codigo do Item</label>
+                    <input pInputText [(ngModel)]="inventario.codigo" inputId="codigo" [ngModelOptions]="{standalone: true}"
+                        placeholder="000000000">
+                </div>
+
+                <div class="col-12 md:col-3">
+                    <label for="codigo">valor</label>
+                    <p-inputNumber [(ngModel)]="inventario.valor" [ngModelOptions]="{standalone: true}"
+                        [showButtons]="true" inputId="valor" mode="currency" currency="BRL">
+                    </p-inputNumber>
+                </div>
+
+                <div class="col-12 md:col-4">
+                    <label for="tipo">Tipo</label>
+                    <p-dropdown name="tipo" [options]="tipos" optionLabel="categoria" [(ngModel)]="inventario.tipo"
+                         #tipo="ngModel" placeholder="Selecionar Tipo">
+                    </p-dropdown>
+                </div>
+
+                <div class="col-12 md:col-4">
+                    <label for="local">Local</label>
+                    <p-dropdown name="local" [options]="locais" optionLabel="ambiente" [(ngModel)]="inventario.ambiente"
+                        #local="ngModel"  placeholder="Selecionar Local">
+                    </p-dropdown>
+                </div>
+
+                <div class="col-12 md:col-4">
+                    <label for="pessoa">Responsável</label>
+                    <p-dropdown name="pessoa" [options]="pessoas" optionLabel="nome" [(ngModel)]="inventario.pessoa"
+                        #nome="ngModel" placeholder="Selecionar Responsável">
+                    </p-dropdown>
+                </div>
+
+
+                <div class="col-12 ">
+                    <button class="p-button-success" pButton label="Salvar" icon="pi pi-fw pi-save"
+                        [disabled]="!f.valid"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
