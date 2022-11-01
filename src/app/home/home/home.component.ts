@@ -11,36 +11,39 @@ import { LocalService } from 'src/app/local/local.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  locais: Local[] = new Array<Local>()
-  local: Local = new Local
-  locaisLazyLoad: Local[] = new Array<Local>()
+  locais = new Array<Local>()
+  loca = new Local
+  locaisLazyLoad = new Array<Local>()
 
   loading: boolean = false
-  
-  constructor(
-    private localService: LocalService ,
 
+  constructor(
+    private localService: LocalService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    
-  }
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
     this.getLocais()
+
   }
 
+  // Recebe itens da tabela Locais
   getLocais() {
     this.localService.listar().subscribe(
       (response) => {
         this.locais = [...response]
         this.locaisLazyLoad = [...response]
-
       }
     )
   }
 
+  paraLocalItens(local: Local) {
+   const ambiente = local.ambiente
+    this.router.navigateByUrl('/itens/local/' +ambiente)
+  }
+  // Define um tempo de recarga até receber as informações do back
   loadCustomers(event: LazyLoadEvent) {
     this.loading = true;
     setTimeout(() => {
@@ -57,5 +60,6 @@ export class HomeComponent implements OnInit {
   lectionChange(value = []) {
     this.locais = [...value];
   }
+
 
 }

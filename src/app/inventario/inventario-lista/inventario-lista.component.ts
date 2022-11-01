@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { Local } from 'src/app/local/local';
 import { Inventario } from '../inventario';
 import { InventarioService } from '../inventario.service';
 
@@ -10,11 +11,12 @@ import { InventarioService } from '../inventario.service';
   styleUrls: ['./inventario-lista.component.css']
 })
 export class InventarioListaComponent implements OnInit {
-  title: string = 'Itens'
-  item: Inventario = new Inventario
-  itens: Inventario[] = new Array<Inventario>()
-  itensLazyLoad: Inventario[] = new Array<Inventario>()
+  title: string = 'Todos os Itens'
 
+  // inventario: Inventario[] = [];
+  item = new Inventario
+  itens = new Array<Inventario>()
+  itensLazyLoad = new Array<Inventario>()
 
   loading: boolean = false
   totaldeRegistros: number = 0
@@ -30,22 +32,34 @@ export class InventarioListaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const local: string = this.route.snapshot.params['local'];
+    const local: Local = this.route.snapshot.params['local'];
 
     this.loading = true;
-    this.getItens()
+    // if (local) {
+    // this.getItensLocal(local)
+    // console.log(local)
+    // } else {
+    this.getItens(local)
+    // }
   }
 
-  getItens() {
+  getItens(local: Local) {
     this.inventarioService.listar().subscribe(
       (response) => {
-        this.itens = [...response]
-        this.itensLazyLoad = [...response]
-        this.totaldeRegistros = response.length
+        if (local != null) {
+          this.title = "Itens de " + local;
+        } else {
+          this.itens = [...response]
+          this.itensLazyLoad = [...response]
+          this.totaldeRegistros = response.length
+        }
       }
-
     )
   }
+
+
+  // getItensLocal(local: Local) { 
+  // }
 
   loadCustomers(event: LazyLoadEvent) {
     this.loading = true;

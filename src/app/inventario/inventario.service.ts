@@ -14,7 +14,7 @@ export class InventarioService {
       this.itemUrl = `${environment.apiURl}/produto`
    }
 
-  listar() {
+  listar() :Observable<Array<Inventario>>{
     return this.http.get<Inventario[]>(this.itemUrl);
   }
 

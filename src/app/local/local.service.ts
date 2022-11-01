@@ -8,12 +8,21 @@ import { Local } from './local';
   providedIn: 'root'
 })
 export class LocalService {
- 
+ public local!: Local;
+
   localUrl: string = '';
   constructor( private http: HttpClient) {
       this.localUrl = `${environment.apiURl}/local`
    }
 
+   setLocal(local: Local){
+    this.local = local;
+   }
+
+   getLocal(local: Local) {
+   return this.local = local
+  }
+    
    listar() {
     return this.http.get<Local[]>(this.localUrl);
   }

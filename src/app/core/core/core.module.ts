@@ -18,18 +18,28 @@ import { UsuarioService } from 'src/app/usuario/usuario.service';
 
 
 @NgModule({
+  /*
+  Componentes globais, como o menu, navbar, buttons, vão no declarations e no exports.
+  */
   declarations: [
     MenuComponent,
   ],
+
   imports: [
     CommonModule,
     HttpClientModule,
     PanelMenuModule,
     InputTextareaModule,
   ],
+  /*
+  Componentes globais, como o menu, vão no declarations e no exports.
+  */
   exports: [
     MenuComponent,
   ],
+   /*
+   Todas as service dos componentes vão no providers.
+   */
   providers: [
     DatePipe,
     UsuarioService,

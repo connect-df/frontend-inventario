@@ -16,17 +16,13 @@ const routes: Routes = [
     path: ':id',
     component: InventarioComponent
   },
-
-  {
-    path: 'local/:local',
-    component: InventarioListaComponent
-  },
-
-
-
   {
     path: 'codigo/:codigo',
     component: InventarioComponent
+  },
+  {
+    path: 'local/:local',
+    component: InventarioListaComponent
   },
 
 ];
