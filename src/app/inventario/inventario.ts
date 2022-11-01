@@ -5,7 +5,7 @@ import { InventarioItem } from "./inventario-item"
 
 export class Inventario {
     id!: number
-    codigo: number = 0
+    codigo: string = ''
     descricao: string = ''
     dtCadastro!: Date
     patrimonio: string = ''

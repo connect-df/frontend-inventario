@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { List } from '@zxing/library/esm/customTypings';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Inventario } from './inventario';
@@ -22,7 +23,7 @@ export class InventarioService {
     return this.http.get<Inventario>(`${this.itemUrl}/${id}`);
   }
 
-  getByCode(codigo: string) {
+  getByCode(codigo: string): Observable<Inventario>{
     return this.http.get<Inventario>(`${this.itemUrl}/codigo/${codigo}`);
   }
 

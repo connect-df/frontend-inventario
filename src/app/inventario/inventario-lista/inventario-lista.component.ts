@@ -33,14 +33,14 @@ export class InventarioListaComponent implements OnInit {
 
   ngOnInit(): void {
     const local: Local = this.route.snapshot.params['local'];
-
+    
     this.loading = true;
-    // if (local) {
-    // this.getItensLocal(local)
-    // console.log(local)
-    // } else {
+    if (local) {
+    this.getItensLocal(local)
+    console.log(local)
+    } else {
     this.getItens(local)
-    // }
+    }
   }
 
   getItens(local: Local) {
@@ -58,8 +58,8 @@ export class InventarioListaComponent implements OnInit {
   }
 
 
-  // getItensLocal(local: Local) { 
-  // }
+  getItensLocal(local: Local) { 
+  }
 
   loadCustomers(event: LazyLoadEvent) {
     this.loading = true;

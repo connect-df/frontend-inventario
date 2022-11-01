@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
@@ -19,7 +20,7 @@ import { InventarioService } from '../inventario.service';
 export class InventarioComponent implements OnInit {
   title: string = 'Cadastrar Inventario'
 
-  inventario: Inventario = new Inventario
+  inventario = new Inventario
   inventarioItens: Observable<Inventario[]>;
 
   tipo = new Tipo
@@ -28,8 +29,9 @@ export class InventarioComponent implements OnInit {
   ambiente: Local = new Local
   locais = new Array<Local>()
 
-  pessoa: Pessoa = new Pessoa 
+  pessoa: Pessoa = new Pessoa
   pessoas = new Array<Pessoa>()
+
 
   constructor(
     private inventarioService: InventarioService,
@@ -47,17 +49,17 @@ export class InventarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // id na url
     const id: number = this.route.snapshot.params['id'];
+
+    // codigo na url
     const codigo: string = this.route.snapshot.params['codigo'];
 
     if (id) {
       this.title = 'Alterar inventario'
       this.getInventario(id)
-    } 
-    
-    if(codigo){
-      this.title = 'Adicionar ao Inventario'
-      this.getCode(codigo)
+    } else if (codigo) {
+      this.getByCode(codigo)
     }
     this.getLocal()
     this.getTipo()
@@ -67,18 +69,25 @@ export class InventarioComponent implements OnInit {
   getInventario(id: number) {
     this.inventarioService.getById(id).subscribe(
       (response) => {
+        console.log(response)
         this.inventario = { ...response }
       }
     )
   }
 
-  getCode(codigo: string) {
+  getByCode(codigo: string) {
     this.inventarioService.getByCode(codigo).subscribe(
       (response) => {
-        this.inventario = { ...response }
-
+        if (response != null){
+        this.title = 'Alterar Item'
+        this.inventario =  {...response}
       }
-    )
+      else{
+        this.title = 'Adicionar Item'
+        this.inventario.codigo = codigo
+      }
+      })
+
   }
 
   getLocal() {
