@@ -1,3 +1,6 @@
+## Git
+- Ao clonar esse projeto você precisará, antes de qualquer coisa dar um `npm install` para assim ser possível usar todas as dependêcias e bibliotecas. 
+
 # InventarioConnect tecnologias
 
 - Este projeto foi desenvolvido com [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
@@ -19,11 +22,6 @@
 ## Testes Unitários
 
 - Use `ng test` para executar testes unitários via [Karma](https://karma-runner.github.io).
-
-## Git
-- Ao clonar esse projeto você precisará, antes de qualqueer coisa dar um `npm install` para assim ser possível usar todas as dependêcias e bibliotecas. 
-
-===========================================================================================================================
 
 ## Sobre o projeto
 
