@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   // auth: {
   //   "username": "srvinventario",
   //   "password": "InVet@2022"
