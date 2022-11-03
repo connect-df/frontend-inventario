@@ -40,6 +40,10 @@ export class LocalComponent implements OnInit {
   getLocal(id: number) {
     this.localService.getById(id).subscribe(
       (response) => {
+        if (response == null) {
+          this.title = "Erro ao encontrar o local"
+          this.messageService.add({ severity: 'error', summary: 'Id inexistente:', detail: 'Não encontramos o local' });
+        }
         this.local = { ...response }
 
       }
@@ -106,27 +110,4 @@ export class LocalComponent implements OnInit {
     });
   }
 
-  onDelete(id: number) {
-    this.confirmationService.confirm({
-      message: 'Deseja realmente DELETAR esse projeto?',
-      header: 'DELETAR',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação!' });
-        this.localService.getDelete(id).subscribe();
-        return window.location.reload();
-      },
-
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
-            break;
-        }
-      }
-    });
-  }
 }

@@ -40,6 +40,10 @@ export class TipoComponent implements OnInit {
   getTipo(id: number) {
     this.tipoService.getById(id).subscribe(
       (response) => {
+        if (response == null) {
+          this.title = "Erro ao encontrar tipo de item"
+          this.messageService.add({ severity: 'error', summary: 'Id inexistente:', detail: 'Não encontramos o tipo de item' });
+        }
         this.tipo = { ...response }
 
       }
@@ -106,27 +110,4 @@ export class TipoComponent implements OnInit {
     });
   }
 
-  onDelete(id: number) {
-    this.confirmationService.confirm({
-      message: 'Deseja realmente DELETAR esse Local?',
-      header: 'DELETAR',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação!' });
-        this.tipoService.getDelete(id).subscribe();
-        return window.location.reload();
-      },
-
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
-            break;
-        }
-      }
-    });
-  }
 }

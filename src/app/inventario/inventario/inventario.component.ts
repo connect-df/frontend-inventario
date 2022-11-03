@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
@@ -69,7 +68,10 @@ export class InventarioComponent implements OnInit {
   getInventario(id: number) {
     this.inventarioService.getById(id).subscribe(
       (response) => {
-        console.log(response)
+        if (response == null) {
+          this.title = "Erro ao encontrar item"
+          this.messageService.add({ severity: 'error', summary: 'Id inexistente:', detail: 'Não encontramos o item' });
+        }
         this.inventario = { ...response }
       }
     )
@@ -78,14 +80,14 @@ export class InventarioComponent implements OnInit {
   getByCode(codigo: string) {
     this.inventarioService.getByCode(codigo).subscribe(
       (response) => {
-        if (response != null){
-        this.title = 'Alterar Item'
-        this.inventario =  {...response}
-      }
-      else{
-        this.title = 'Adicionar Item'
-        this.inventario.codigo = codigo
-      }
+        if (response != null) {
+          this.title = 'Alterar Item'
+          this.inventario = { ...response }
+        }
+        else {
+          this.title = 'Adicionar Item'
+          this.inventario.codigo = codigo
+        }
       })
 
   }
@@ -118,12 +120,19 @@ export class InventarioComponent implements OnInit {
 
     this.inventarioService.getAlterar(this.inventario.id, this.inventario).subscribe(
       (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Inventario alterado com sucesso!' });
+        this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Patrimônio alterado com sucesso!' });
         setTimeout(() => {
           this.router.navigate(['/itens'])
         }, 1000);
       }, (erro) => {
-        console.log(erro);
+        if (erro.status == 404) {
+          this.messageService.add({ severity: 'error', summary: 'Erro 404', detail: 'Página não encontrada.' });
+        } else if (erro.status == 500) {
+          this.messageService.add({ severity: 'error', summary: 'Erro 500', detail: 'Houve um erro ao carregar ao informações.' });
+        }
+        else if (erro != null) {
+          this.messageService.add({ severity: 'error', summary: 'Erro de sistema', detail: 'Estamos enfrentado alguns erros de sistema. Tente novamente mais tarde.' });
+        }
       }
     )
   }
@@ -131,7 +140,7 @@ export class InventarioComponent implements OnInit {
   getIncluir() {
     this.inventarioService.getIncluir(this.inventario).subscribe(
       (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Inclusão ', detail: 'Projeto adicionado com sucesso!' });
+        this.messageService.add({ severity: 'success', summary: 'Inclusão ', detail: 'Patrimônio adicionado com sucesso!' });
         setTimeout(() => {
           this.router.navigate(['/itens'])
         }, 1000);
@@ -172,29 +181,6 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-  onDelete(id: number) {
-    this.confirmationService.confirm({
-      message: 'Deseja realmente DELETAR esse Inventario?',
-      header: 'DELETAR',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação!' });
-        this.inventarioService.getDelete(id).subscribe();
-        return window.location.reload();
-      },
-
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
-            break;
-        }
-      }
-    });
-  }
 
 
 }

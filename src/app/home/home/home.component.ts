@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LazyLoadEvent } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Local } from 'src/app/local/local';
 import { LocalService } from 'src/app/local/local.service';
 
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private localService: LocalService,
     private router: Router,
-    private route: ActivatedRoute
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -35,13 +35,20 @@ export class HomeComponent implements OnInit {
       (response) => {
         this.locais = [...response]
         this.locaisLazyLoad = [...response]
-      }
-    )
+      }, erro => {
+        if (erro.status == 404) {
+          this.messageService.add({ severity: 'error', summary: 'Erro 404', detail: 'Não encontramos a página.' });
+        } else if (erro.status == 500) {
+          this.messageService.add({ severity: 'error', summary: 'Erro 500', detail: 'Houve um erro ao carregar as informações.' });
+        } else if ( erro != null){
+          this.messageService.add({ severity: 'error', summary: 'Erro desconhecido', detail: 'Estamos enfrentado alguns erros no sistema. Tente novamente mais tarde.' });
+        }
+      })
   }
 
   paraLocalItens(local: Local) {
-   const ambiente = local.ambiente
-    this.router.navigateByUrl('/itens/local/' +ambiente)
+    const ambiente = local.ambiente
+    this.router.navigateByUrl('/itens/local/' + ambiente)
   }
   // Define um tempo de recarga até receber as informações do back
   loadCustomers(event: LazyLoadEvent) {

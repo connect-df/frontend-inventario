@@ -108,28 +108,5 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  onDelete(id: number){
-    this.confirmationService.confirm({
-      message: 'Deseja realmente DELETAR esse Usuario?',
-      header: 'DELETAR',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação!' });
-        this.usuarioService.getDelete(id).subscribe();
-        return window.location.reload();
-      },
-      
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
-            break;
-        }
-      }
-    });
-  }
 
 }

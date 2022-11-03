@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 
@@ -65,9 +65,29 @@ export class UsuarioListaComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação!' });
-        this.usuarioService.getDelete(id).subscribe();
-        return window.location.reload();
+        this.usuarioService.getDelete(id).subscribe(
+          () => {
+            this.messageService.add({ severity: 'success', summary: 'Deletado', detail: 'Usuario deletado com sucesso!' });
+            setTimeout(() => {
+              return window.location.reload();
+            }, 1000)
+          }, (erro) => {
+            console.log(erro)
+          }
+        );
+
+
       },
-    })
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
+            break;
+        }
+      }
+    });
   }
 }

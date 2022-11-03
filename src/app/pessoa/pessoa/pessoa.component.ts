@@ -41,6 +41,10 @@ export class PessoaComponent implements OnInit {
   getPessoa(id: number) {
     this.pessoaService.getById(id).subscribe(
       (response) => {
+        if (response == null) {
+          this.title = "Erro ao encontrar pessoa"
+          this.messageService.add({ severity: 'error', summary: 'Id inexistente:', detail: 'Não encontramos a pessoa solicitada' });
+        }
         this.pessoa = { ...response }
 
       }
@@ -53,7 +57,7 @@ export class PessoaComponent implements OnInit {
       (response) => {
         this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Pessoa alterado com sucesso!' });
         setTimeout(() => {
-          this.router.navigate(['/usuariosssssss'])
+          this.router.navigate(['/pessoa'])
         }, 1000);
       }, (erro) => {
         console.log(erro);
@@ -68,7 +72,7 @@ export class PessoaComponent implements OnInit {
       (response) => {
         this.messageService.add({ severity: 'success', summary: 'Inclusão ', detail: 'Pessoa cadastrado com sucesso!' });
         setTimeout(() => {
-          this.router.navigate(['/pessoas'])
+          this.router.navigate(['/pessoa'])
         }, 1000);
       }, (erro) => {
         console.log(erro);
@@ -107,27 +111,4 @@ export class PessoaComponent implements OnInit {
     });
   }
 
-  onDelete(id: number) {
-    this.confirmationService.confirm({
-      message: 'Deseja realmente DELETAR esse Responsável?',
-      header: 'DELETAR',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmado', detail: 'Você confirmou a operação!' });
-        this.pessoaService.getDelete(id).subscribe();
-        return window.location.reload();
-      },
-
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a operação.' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a operação.' });
-            break;
-        }
-      }
-    });
-  }
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { BarcodeFormat, InvertedLuminanceSource, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @Component({
@@ -25,6 +26,9 @@ export class LeitorComponent {
 
   constructor(
     public router: Router,
+    
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
   ) {
    
   }
@@ -33,10 +37,11 @@ export class LeitorComponent {
 
     this.qrResultString = resultString;
 
-    console.log(this.qrResultString)
-
-    if (resultString) {
+    if (resultString.length <= 9) {
       this.router.navigate(['itens/codigo/' + resultString])
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Codigo inválido', detail: resultString+' não é um código válido.' });
+
     }
   }
 
