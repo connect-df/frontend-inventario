@@ -14,6 +14,8 @@
     align-items: center;
     margin: 0;
     padding: 0;
+        /* -webkit-mask-image:url(/assets/showcase/img/mask-image.png); */
+        
 }
 
 .container-leitor {

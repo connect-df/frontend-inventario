@@ -5,19 +5,19 @@
     </div> <!-- Botão do leitor -->
 
     <div class="container flex flex-wrap justify-content-around border-round-md">
-        
+
         <div *ngFor="let local of locais" class=" flex m-1 border-round-md" responsiveLayout="scroll">
-        
+
             <p-card class="card cursor-pointer" header="{{local.ambiente}}" [style]="{width: '380px'}"
-                styleClass="p-card-shadow"  (click) = 'paraLocalItens(local)'>
-                 <!-- routerLink='/itens/local/{{local | json}}/' -->
+                styleClass="p-card-shadow" (click)='paraLocalItens(local)'>
+
                 <ng-template pTemplate="header" class="containerImg">
                     <img alt="Card" src="assets/showcase/img/connect_logo.svg" class="bg-white p-3 border-round-md 
                         border-noround-bottom">
                 </ng-template>
             </p-card> <!-- Cards vinculados ao local -->
-        
+
         </div>
-    
+
     </div><!-- Cards -->
 </div> <!-- Home -->

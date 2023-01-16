@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'local/:local',
     component: InventarioListaComponent
   },
+  {
+    path: 'local/:local/:id',
+    component: InventarioListaComponent
+  }
 
 ];
 

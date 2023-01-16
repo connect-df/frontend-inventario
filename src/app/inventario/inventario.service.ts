@@ -26,8 +26,8 @@ export class InventarioService {
     return this.http.get<Inventario>(`${this.itemUrl}/codigo/${codigo}`);
   }
 
-  getByLocal(local: string): Observable<Inventario> {
-    return this.http.get<Inventario>(`${this.itemUrl}/${local}`);
+  getByLocal(local: string): Observable<Array<Inventario>>{
+    return this.http.get<Inventario[]>(`${this.itemUrl}/ambiente/${local}`);
   }
 
   getIncluir(request: Inventario) {

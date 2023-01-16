@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { Local } from 'src/app/local/local';
 import { LocalService } from 'src/app/local/local.service';
 
@@ -47,15 +47,14 @@ export class HomeComponent implements OnInit {
   }
 
   paraLocalItens(local: Local) {
-    const ambiente = local.ambiente
-    this.router.navigateByUrl('/itens/local/' + ambiente)
+    const ambiente = local
+    this.router.navigateByUrl('/itens/local/' + ambiente.id)
   }
   // Define um tempo de recarga até receber as informações do back
   loadCustomers(event: LazyLoadEvent) {
     this.loading = true;
     setTimeout(() => {
       if (this.locais) {
-
         let numPrimeiraLinha: number = Number(event.first)
         let numLinhasPagina: number = (numPrimeiraLinha + Number(event.rows))
         this.locais = [...this.locaisLazyLoad.slice(numPrimeiraLinha, numLinhasPagina)];

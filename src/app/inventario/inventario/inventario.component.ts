@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Local } from 'src/app/local/local';
@@ -31,6 +31,7 @@ export class InventarioComponent implements OnInit {
   pessoa: Pessoa = new Pessoa
   pessoas = new Array<Pessoa>()
 
+  local = new Local
 
   constructor(
     private inventarioService: InventarioService,
@@ -41,7 +42,6 @@ export class InventarioComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
 
-    private router: Router,
     private route: ActivatedRoute
   ) {
     this.inventarioItens = this.inventarioService.listar()
@@ -54,12 +54,15 @@ export class InventarioComponent implements OnInit {
     // codigo na url
     const codigo: string = this.route.snapshot.params['codigo'];
 
+    const local: string = this.route.snapshot.params['local']
+
     if (id) {
       this.title = 'Alterar inventario'
       this.getInventario(id)
     } else if (codigo) {
       this.getByCode(codigo)
     }
+
     this.getLocal()
     this.getTipo()
     this.getPessoa()
@@ -122,7 +125,7 @@ export class InventarioComponent implements OnInit {
       (response) => {
         this.messageService.add({ severity: 'success', summary: 'Alteração ', detail: 'Patrimônio alterado com sucesso!' });
         setTimeout(() => {
-          this.router.navigate(['/itens'])
+          window.history.back();
         }, 1000);
       }, (erro) => {
         if (erro.status == 404) {
@@ -142,7 +145,7 @@ export class InventarioComponent implements OnInit {
       (response) => {
         this.messageService.add({ severity: 'success', summary: 'Inclusão ', detail: 'Patrimônio adicionado com sucesso!' });
         setTimeout(() => {
-          this.router.navigate(['/itens'])
+          window.history.back();
         }, 1000);
       }, (erro) => {
         console.log(erro);
@@ -181,6 +184,7 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-
-
+  voltar() {
+    window.history.back();
+  }
 }

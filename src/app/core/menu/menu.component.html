@@ -1,10 +1,10 @@
 <nav class="navbar" responsiveLayout="stack">
   <div class="grid p-fluid justify-content-around ">
-    <div class="col-10 mt-1">
+    <div class="col-8 mt-1">
       <picture>
         <img src="assets\showcase\img\connect_logo.svg" width="130 px" routerLink="/">
       </picture>
-   
+
     </div>
     <div class="col-0">
       <a class="btMenu" (click)="exibirNav = !exibirNav">
@@ -13,6 +13,7 @@
     </div>
   </div>
 </nav>
+
 
 <p-panelMenu #menu [hidden]="!exibirNav" [model]="itemMenu" backLabel="Voltar" [style]="{
         'position': 'fixed',

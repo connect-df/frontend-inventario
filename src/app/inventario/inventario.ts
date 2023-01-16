@@ -7,7 +7,7 @@ export class Inventario {
     id!: number
     codigo: string = ''
     descricao: string = ''
-    dtCadastro!: Date
+    dtCadastro!: string
     patrimonio: string = ''
     situacao: string = ''
     valor: number = 0.0

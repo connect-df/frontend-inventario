@@ -19,7 +19,7 @@ export class InventarioListaComponent implements OnInit {
 
   loading: boolean = false
   totaldeRegistros: number = 0
-
+  local = new Local
   constructor(
     private inventarioService: InventarioService,
 
@@ -32,28 +32,23 @@ export class InventarioListaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const local: Local = this.route.snapshot.params['local'];
-
+    const local = this.route.snapshot.params['local'];
     this.loading = true;
     if (local) {
       this.getItensLocal(local)
-      console.log(local)
+      this.title = "Itens"
     } else {
-      this.getItens(local)
+      this.getItens()
     }
   }
 
-  getItens(local: Local) {
+  getItens() {
     this.inventarioService.listar().subscribe(
       (response) => {
         if (response) {
-          if (local != null) {
-            this.title = "Itens de " + local;
-          } else if (response != null) {
-            this.itens = [...response];
-            this.itensLazyLoad = [...response]
-            this.totaldeRegistros = response.length
-          }
+          this.itens = [...response];
+          this.itensLazyLoad = [...response]
+          this.totaldeRegistros = response.length
         }
       }, erro => {
         if (erro.status == 404) {
@@ -69,7 +64,26 @@ export class InventarioListaComponent implements OnInit {
   }
 
 
-  getItensLocal(local: Local) {
+  getItensLocal(local: string) {
+    console.log(local)
+    this.inventarioService.getByLocal(local).subscribe(
+      (response) => {
+        this.itens = [...response];
+        this.itensLazyLoad = [...response]
+        this.totaldeRegistros = response.length
+      },
+      erro => {
+        if (erro.status == 404) {
+          this.messageService.add({ severity: 'error', summary: 'Erro 404', detail: 'Página não encontrada.' });
+        } else if (erro.status == 500) {
+          this.messageService.add({ severity: 'error', summary: 'Erro 500', detail: 'Houve um erro ao carregar as informações.' });
+        }
+        else if (erro != null) {
+          this.messageService.add({ severity: 'error', summary: 'Erro de sistema', detail: 'Estamos enfrentado alguns erros de sistema. Tente novamente mais tarde.' });
+        }
+      }
+
+    )
   }
 
   loadCustomers(event: LazyLoadEvent) {
@@ -115,7 +129,6 @@ export class InventarioListaComponent implements OnInit {
           }
         );
 
-
       },
       reject: (type: any) => {
         switch (type) {
@@ -128,6 +141,10 @@ export class InventarioListaComponent implements OnInit {
         }
       }
     });
+  }
+
+  editar(id: number){
+    this.router.navigate([`/itens/${id}`])
   }
 
 }
