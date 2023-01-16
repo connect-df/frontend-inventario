@@ -14,7 +14,7 @@ import { LocalService } from 'src/app/local/local.service';
 import { PessoaService } from 'src/app/pessoa/pessoa.service';
 import { TipoService } from 'src/app/tipo/tipo.service';
 import { UsuarioService } from 'src/app/usuario/usuario.service';
-
+import {ButtonModule} from 'primeng/button';
 
 
 @NgModule({
@@ -30,6 +30,7 @@ import { UsuarioService } from 'src/app/usuario/usuario.service';
     HttpClientModule,
     PanelMenuModule,
     InputTextareaModule,
+    ButtonModule
   ],
   /*
   Componentes globais, como o menu, vão no declarations e no exports.

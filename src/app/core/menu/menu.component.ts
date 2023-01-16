@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { LoginService } from './../../guards/login/login.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
@@ -9,6 +10,11 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuComponent implements OnInit {
 
+  @Input()
+  isLogged: boolean = false;
+  @Input()
+  isAdmin: boolean = false;
+
   exibirNav = false;
   exibirUsuario = false;
   exibirInventario = false;
@@ -18,10 +24,19 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
     this.getItensMenu()
+  }
+
+  login(): void {
+    this.loginService.login();
+  }
+
+  logout(): void {
+    this.loginService.logout();
   }
 
 
@@ -89,18 +104,18 @@ export class MenuComponent implements OnInit {
       {
         label: 'Sair',
         icon: 'pi pi-fw pi-sign-out',
-        command: () => this.sair(),
+        command: () => this.logout(),
       },
     ];
   }
 
-  sair() {
-    localStorage.clear();
+  // sair() {
+  //   localStorage.clear();
 
-    this.router.navigate(['./']).then(() => {
-      window.location.reload();
-    })
-  }
+  //   this.router.navigate(['./']).then(() => {
+  //     window.location.reload();
+  //   })
+  // }
 
   leitor() {
     this.router.navigate(['/leitor']).then(() => {

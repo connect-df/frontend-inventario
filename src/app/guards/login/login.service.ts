@@ -1,3 +1,4 @@
+import { OAuthService } from 'angular-oauth2-oidc';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(private oauthService: OAuthService) { }
+
+  login(): void {
+    this.oauthService.initImplicitFlowInternal();
+  }
+  logout(): void {
+    this.oauthService.logOut();
+  }
 }

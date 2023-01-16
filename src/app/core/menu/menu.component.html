@@ -4,10 +4,15 @@
       <picture>
         <img src="assets\showcase\img\connect_logo.svg" width="130 px" routerLink="/">
       </picture>
-
+     
+      
     </div>
-    <div class="col-0">
-      <a class="btMenu" (click)="exibirNav = !exibirNav">
+    <div class="col-0 flex">
+      <div class="h-1rem flex mt-4 justify-content-center">
+        <button *ngIf="!isLogged" pButton type="button" label="Entrar" (click)="login()"></button>
+
+      </div>
+      <a *ngIf="isLogged" class="btMenu" (click)="exibirNav = !exibirNav">
         <i class="iconMenu" [ngClass]="!exibirNav ? 'pi pi-fw pi-bars' : 'pi pi-fw pi-times'"></i>
       </a>
     </div>
