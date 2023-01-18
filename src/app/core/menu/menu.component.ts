@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -8,6 +9,9 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+
+  usuario = '';
+  logado = false;
 
   exibirNav = false;
   exibirUsuario = false;
@@ -18,15 +22,30 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private keycloakService: KeycloakService
   ) { }
 
   ngOnInit() {
     this.getItensMenu()
+    this.initializeUserOptions()
+    if (this.keycloakService.getKeycloakInstance().authenticated == true) {
+      this.statusLogado();
+    }
+    // console.log(this.keycloakService.getKeycloakInstance())
   }
 
+  private initializeUserOptions(): void {
+    const nome = this.keycloakService.getKeycloakInstance().profile?.firstName
+    const sobrenome = this.keycloakService.getKeycloakInstance().profile?.lastName
+    const nomeCompleto = `${nome} ${sobrenome}`;
+    this.usuario = nomeCompleto
+  }
+
+  statusLogado() {
+    this.logado = true
+  }
 
   getItensMenu() {
-
     this.itemMenu = [
       {
         label: "Administrador",//String(localStorage!.getItem('nomeUsuario')),
@@ -89,23 +108,19 @@ export class MenuComponent implements OnInit {
       {
         label: 'Sair',
         icon: 'pi pi-fw pi-sign-out',
-        command: () => this.sair(),
+        command: () => this.logout(),
       },
     ];
   }
 
-  sair() {
-    localStorage.clear();
-
-    this.router.navigate(['./']).then(() => {
-      window.location.reload();
-    })
+  logout() {
+    // localStorage.removeItem('recent-used-realms')
+    this.logado = false;
+    this.keycloakService.logout('/wait')
   }
 
   leitor() {
-    this.router.navigate(['/leitor']).then(() => {
-      window.location.reload();
-    })
+    this.router.navigate(['/leitor'])
   }
 
 }

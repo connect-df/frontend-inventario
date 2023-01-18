@@ -22,6 +22,8 @@
     "@zxing/browser": "^0.1.1",
     "@zxing/library": "^0.19.1",
     "@zxing/ngx-scanner": "^3.6.2",
+    "keycloak-angular": "^8.0.1",
+    "keycloak-js": "^11.0.1",
     "primeflex": "^3.2.1",
     "primeicons": "^6.0.1",
     "primeng": "^14.1.2",

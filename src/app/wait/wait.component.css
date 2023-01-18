@@ -1,0 +1,26 @@
+.container-wait {
+    width: 500px;
+    margin: auto;
+}
+
+.titulo {
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.paragrafo {
+    text-align: end;
+    padding: 8px;
+}
+
+.span {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.btn-login {
+    text-decoration: none;
+    color: orange;
+}
+
