@@ -120,6 +120,7 @@ export class MenuComponent implements OnInit {
   }
 
   leitor() {
+    this.exibirNav = false
     this.router.navigate(['/leitor'])
   }
 
