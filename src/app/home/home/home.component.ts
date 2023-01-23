@@ -1,3 +1,4 @@
+import { KeycloakService } from 'keycloak-angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
@@ -17,18 +18,21 @@ export class HomeComponent implements OnInit {
 
   loading: boolean = false
 
+  usuario = ''
+  logado = false
+
   constructor(
     private localService: LocalService,
     private router: Router,
     private messageService: MessageService,
+    private keycloakService: KeycloakService
   ) { }
 
   ngOnInit(): void {
     this.loading = true;
     this.getLocais()
-
   }
-
+  
   // Recebe itens da tabela Locais
   getLocais() {
     this.localService.listar().subscribe(

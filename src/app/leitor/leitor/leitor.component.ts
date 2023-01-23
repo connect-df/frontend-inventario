@@ -45,4 +45,8 @@ export class LeitorComponent {
     }
   }
 
+  voltar(): void {
+    window.history.back()
+  }
+
 }

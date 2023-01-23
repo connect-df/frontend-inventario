@@ -24,3 +24,10 @@
     font-size: 25px;
     margin-right: 10px;
   }
+
+  .span-usuario {
+    font-weight: bold;
+    font-size: 12px;
+    font-family: sans-serif ;
+    color: #f58220;
+  }

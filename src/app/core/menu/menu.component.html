@@ -2,12 +2,15 @@
   <div class="grid p-fluid justify-content-around ">
     <div class="col-8 mt-1 cursor-pointer">
       <picture>
-        <img src="assets\showcase\img\connect_logo.svg" width="130 px" routerLink="/">
+        <img src="assets\showcase\img\connect_logo.svg" width="130 px" routerLink="/home">
       </picture>
 
     </div>
+    <div class="mt-4">
+      <span *ngIf="logado" class="span-usuario">Olá, {{usuario}}</span>
+    </div>
     <div class="col-0">
-      <a class="btMenu" (click)="exibirNav = !exibirNav">
+      <a *ngIf="logado" class="btMenu" (click)="exibirNav = !exibirNav" >
         <i class="iconMenu" [ngClass]="!exibirNav ? 'pi pi-fw pi-bars' : 'pi pi-fw pi-times'"></i>
       </a>
     </div>
@@ -16,14 +19,14 @@
 
 
 <p-panelMenu #menu [hidden]="!exibirNav" [model]="itemMenu" backLabel="Voltar" [style]="{
-        'position': 'fixed',
-        'top': '58px',
-        'bottom': '0',
-        'right': '0',
-        'margin': '0',
-        'padding': '0',
-        'width': '290px',
-        'z-index': '1000',
-        'border-left':'1px solid orange',
-        'background-color': '#d2d4da'}">
+  'position': 'fixed',
+  'top': '58px',
+  'bottom': '0',
+  'right': '0',
+  'margin': '0',
+  'padding': '0',
+  'width': '290px',
+  'z-index': '1000',
+  'border-left':'1px solid orange',
+  'background-color': '#d2d4da'}">
 </p-panelMenu>
