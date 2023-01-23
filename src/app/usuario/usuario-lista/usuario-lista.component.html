@@ -1,8 +1,8 @@
 <div class="container m-3 p-3 bg-white border-round-md">
   <p-messages></p-messages>
     <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
-  
-  
+
+
     <div class="grid p-fluid">
       <div class="col-12 md:col-10">
         <br />
@@ -13,14 +13,14 @@
         <button pButton routerLink="/usuarios/novo" icon="pi pi-fw pi-user-plus" label="Novo"></button>
       </div>
     </div>
-  
+
     <div>
       <p-table [value]="usuarios" responsiveLayout="stack" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
         [paginator]="true" [rows]="5" [totalRecords]=" totaldeRegistros" [loading]="loading"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,20]"
         currentPageReportTemplate="Registros {first} de {last} - Total {totalRecords} registros"
         [globalFilterFields]="['usuario.nome']" dataKey="id">
-  
+
         <ng-template pTemplate="caption">
           Lista de itens
         </ng-template>
@@ -35,24 +35,24 @@
         </ng-template>
         <ng-template pTemplate="body" let-usuario let-columns="columns">
           <tr>
-  
+
             <td><span class="p-column-title">Id: </span>{{ usuario.id }}</td>
             <td><span class="p-column-title">Tipo: </span>{{ usuario.nome }}</td>
             <td><span class="p-column-title">email: </span>{{usuario.email}}</td>
             <td><span class="p-column-title">senha: </span>{{ usuario.senha }}</td>
-  
-  
+
+
             <td><span class="p-column-title">Ações: </span>
               <button pButton icon="pi pi-fw pi-pencil" [routerLink]="['/usuarios', usuario.id]"></button>
-  
+
               <button class="p-button-danger ml-1" pButton icon="pi pi-fw pi-trash" (click)="onDelete(usuario.id)"></button>
             </td>
           </tr>
         </ng-template>
-  
+
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="5">Nenhum usuario criado.</td>
+            <td colspan="12">Nenhum usuario criado.</td>
           </tr>
         </ng-template>
       </p-table>

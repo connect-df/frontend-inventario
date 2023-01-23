@@ -36,6 +36,7 @@
           <th>Tipo</th>
           <th>Local</th>
           <th>Valor</th>
+          <th>Propriedade</th>
           <th>Ações</th>
         </tr>
       </ng-template>
@@ -52,7 +53,7 @@
           <td><span class="p-column-title">Tipo: </span>{{ inventario?.tipo?.categoria }}</td>
           <td><span class="p-column-title">local: </span>{{inventario?.ambiente?.ambiente}}</td>
           <td><span class="p-column-title">Valor: </span>{{ inventario.valor | currency: "BRL" }}</td>
-
+          <td><span class="p-column-title">Propriedade: </span>{{inventario.propriedade}}</td>
 
           <td><span class="p-column-title">Ações: </span>
             <button pButton icon="pi pi-fw pi-pencil" (click)="editar(inventario.id)"></button>
@@ -65,7 +66,7 @@
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="10">Nenhum inventario criado.</td>
+          <td colspan="12">Nenhum inventario criado.</td>
         </tr>
       </ng-template>
     </p-table>

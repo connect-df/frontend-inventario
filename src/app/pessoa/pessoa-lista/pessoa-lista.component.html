@@ -1,6 +1,6 @@
 <div class="container m-3 p-3 bg-white border-round-md">
   <p-messages></p-messages>
-    <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>  
+    <p-confirmDialog acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
     <div class="grid p-fluid">
       <div class="col-12 md:col-10">
         <br />
@@ -11,14 +11,14 @@
         <button pButton routerLink="/pessoa/novo" icon="pi pi-fw pi-user-plus" label="Novo"></button>
       </div>
     </div>
-  
+
     <div>
       <p-table [value]="Pessoas" responsiveLayout="stack" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
         [paginator]="true" [rows]="5" [totalRecords]=" totaldeRegistros" [loading]="loading"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,20]"
         currentPageReportTemplate="Registros {first} de {last} - Total {totalRecords} registros"
         [globalFilterFields]="['pessoa.nome']" dataKey="id">
-  
+
         <ng-template pTemplate="caption">
           Lista de itens
         </ng-template>
@@ -33,24 +33,24 @@
         </ng-template>
         <ng-template pTemplate="body" let-pessoa let-columns="columns">
           <tr>
-  
+
             <td><span class="p-column-title">Id: </span>{{ pessoa.id }}</td>
             <td><span class="p-column-title">Tipo: </span>{{ pessoa.nome }}</td>
             <td><span class="p-column-title">Email: </span>{{pessoa.email}}</td>
             <td><span class="p-column-title">Telefone: </span>{{ pessoa.telefone }}</td>
-  
-  
+
+
             <td><span class="p-column-title">Ações: </span>
               <button pButton icon="pi pi-fw pi-pencil" [routerLink]="['/pessoa', pessoa.id]"></button>
-  
+
               <button class="p-button-danger ml-1" pButton icon="pi pi-fw pi-trash" (click)="onDelete(pessoa.id)"></button>
             </td>
           </tr>
         </ng-template>
-  
+
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="5">Nenhuma pessoa criado.</td>
+            <td colspan="12">Nenhuma pessoa criado.</td>
           </tr>
         </ng-template>
       </p-table>

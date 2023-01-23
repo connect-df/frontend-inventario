@@ -8,20 +8,19 @@
     height: 59px;
     justify-content: center;
     border-bottom: 1px solid #f58320;
-  
+
     background-color: #fefefe;
     z-index: 99999;
   }
-  
+
   .btMenu {
     position: relative;
     top: 30%;
   }
-  
+
   .iconMenu {
     color: #f58220;
     font-weight: 900;
     font-size: 25px;
     margin-right: 10px;
   }
-  
