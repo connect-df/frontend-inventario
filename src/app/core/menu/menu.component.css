@@ -26,8 +26,15 @@
   }
 
   .span-usuario {
-    font-weight: bold;
-    font-size: 12px;
-    font-family: sans-serif ;
-    color: #f58220;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .span-usuario {
+      font-weight: bold;
+      font-size: 12px;
+      font-family: sans-serif ;
+      color: #f58220;
+      display: flex !important;
+    }
   }
