@@ -14,8 +14,8 @@ export class WaitComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(): void {
-    
+  login(){
+    this.router.navigate(['/home'])
   }
 
 }

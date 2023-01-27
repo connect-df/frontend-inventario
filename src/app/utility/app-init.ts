@@ -4,7 +4,7 @@ export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boo
     return () =>
         keycloak.init({
             config: {
-                url: 'http://localhost:8083',
+                url: 'http://srvconnectum:8083',
                 realm: 'connectdf',
                 clientId: 'connect-inventario'
             },

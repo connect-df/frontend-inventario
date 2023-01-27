@@ -10,6 +10,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuComponent implements OnInit {
 
+  nomeUser = '';
   usuario = '';
   logado = false;
 
@@ -48,7 +49,7 @@ export class MenuComponent implements OnInit {
   getItensMenu() {
     this.itemMenu = [
       {
-        label: "Administrador",//String(localStorage!.getItem('nomeUsuario')),
+        label: this.usuario,
         icon: 'pi pi-fw pi-user',
         command: () => this.exibirNav = false
       },
@@ -116,7 +117,10 @@ export class MenuComponent implements OnInit {
   logout() {
     // localStorage.removeItem('recent-used-realms')
     this.logado = false;
-    this.keycloakService.logout('/wait')
+    this.keycloakService.logout().then(() => {
+      this.router.navigate(['/wait']);
+    });
+
   }
 
   leitor() {

@@ -23,7 +23,8 @@ export class AuthGuard extends KeycloakAuthGuard {
     ): Promise<boolean> {
         if (!this.authenticated) {
             await this.keycloak.login({
-                redirectUri: window.location.origin + state.url
+                // redirectUri: window.location.origin +  state.url
+                redirectUri: "http://srvconnectum:4400/#/home"
             });
         }
 
